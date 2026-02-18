@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramzan 2026 Timetable - Mumbai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="light-mode">
+    <div class="background-decor"></div>
+
+    <header>
+        <div class="container compact-header">
+            <div class="header-brand">
+                <h1>Ramzan 2026</h1>
+                <div class="loc-badge">
+                    <i class="fas fa-location-dot"></i> Mumbai, India
+                </div>
+            </div>
+            <button id="whatsapp-share" class="share-btn">
+                <i class="fab fa-whatsapp"></i> Share
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Countdown Section -->
+        <section id="timer-section" class="main-card compact-timer">
+            <h2 id="timer-title">Time remaining</h2>
+            <div class="countdown-container">
+                <div class="time-block">
+                    <span id="hours">00</span>
+                    <label>Hr</label>
+                </div>
+                <div class="time-block separator">:</div>
+                <div class="time-block">
+                    <span id="minutes">00</span>
+                    <label>Min</label>
+                </div>
+                <div class="time-block separator">:</div>
+                <div class="time-block">
+                    <span id="seconds">00</span>
+                    <label>Sec</label>
+                </div>
+            </div>
+            <div id="status-display" class="status-active">Loading...</div>
+        </section>
+
+        <!-- Timetable Section -->
+        <section id="timetable-section">
+            <div class="timetable-grid">
+                <div class="table-container main-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ROZA</th>
+                                <th>DATE</th>
+                                <th>SEHRI</th>
+                                <th>IFTAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-left"></tbody>
+                    </table>
+                </div>
+                <div class="table-container main-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ROZA</th>
+                                <th>DATE</th>
+                                <th>SEHRI</th>
+                                <th>IFTAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-right"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Duas Accordion Section -->
+        <section class="duas-accordion">
+            <details class="dua-item main-card">
+                <summary><span>Sehri ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
+                <div class="dua-content">
+                    <p class="arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
+                    <p class="translation">"I intend to keep the fast for tomorrow in the month of Ramadan."</p>
+                </div>
+            </details>
+            <details class="dua-item main-card">
+                <summary><span>Iftari ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
+                <div class="dua-content">
+                    <p class="arabic">اللّٰهُمَّ اِنِّی لَکَ صُمْتُ وَبِکَ اٰمَنْتُ وَعَلَیْکَ تَوَکَّلْتُ وَعَلٰی
+                        رِزْقِکَ اَفْطَرْتُ</p>
+                    <p class="translation">"O Allah! I fasted for You and I believe in You and I break my fast with Your
+                        sustenance."</p>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Made with love with <a href="https://www.instagram.com/kaimu_zx78/" target="_blank"
+                    class="instagram-link">
+                    <i class="fab fa-instagram"></i> kaimu_zx78
+                </a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

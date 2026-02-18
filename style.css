@@ -1,0 +1,358 @@
+:root {
+    --bg-color: #fdfaf2;
+    --card-bg: #ffffff;
+    --primary-color: #a37a00;
+    --secondary-color: #1b5e20;
+    --whatsapp-green: #25D366;
+    --accent-glow: rgba(163, 122, 0, 0.4);
+    --text-color: #2c2c2c;
+    --text-muted: #777777;
+    --border-color: rgba(163, 122, 0, 0.12);
+}
+
+@keyframes cell-glow {
+    0% {
+        background-color: rgba(163, 122, 0, 0.1);
+        box-shadow: inset 0 0 5px var(--accent-glow);
+    }
+
+    50% {
+        background-color: rgba(163, 122, 0, 0.2);
+        box-shadow: inset 0 0 15px var(--accent-glow);
+    }
+
+    100% {
+        background-color: rgba(163, 122, 0, 0.1);
+        box-shadow: inset 0 0 5px var(--accent-glow);
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.25;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+/* Organized Premium Header */
+header {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    margin-bottom: 12px;
+}
+
+.compact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.header-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--secondary-color);
+    line-height: 1;
+}
+
+.loc-badge {
+    font-size: 0.65rem;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loc-badge i {
+    color: var(--primary-color);
+    font-size: 0.7rem;
+}
+
+.share-btn {
+    background: var(--whatsapp-green);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+    transition: all 0.2s ease;
+}
+
+.share-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(37, 211, 102, 0.2);
+}
+
+/* Main Cards */
+.main-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Timer Section */
+.compact-timer {
+    text-align: center;
+    border-top: 4px solid var(--primary-color);
+}
+
+#timer-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.time-block span {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.time-block label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: block;
+}
+
+.separator {
+    font-size: 1.8rem;
+    color: #eee;
+    padding-bottom: 15px;
+}
+
+#status-display {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    padding: 5px 15px;
+    background: rgba(27, 94, 32, 0.05);
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* Timetable Grid */
+.timetable-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    padding: 0;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #fdfaf2;
+    text-align: left;
+    padding: 8px 6px;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 6px 6px;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* Column alignment fix for 12h format */
+th:first-child,
+td:first-child {
+    width: 35px;
+    text-align: center;
+}
+
+/* ROZA */
+th:nth-child(2),
+td:nth-child(2) {
+    width: 55px;
+}
+
+/* DATE */
+th:nth-child(3),
+td:nth-child(3),
+th:nth-child(4),
+td:nth-child(4) {
+    width: 70px;
+}
+
+/* SEHRI/IFTAR 12h */
+
+/* SMART ROW & CELL STYLES */
+.active-row {
+    background: rgba(163, 122, 0, 0.03);
+}
+
+.glow-cell {
+    animation: cell-glow 2s infinite ease-in-out;
+    color: var(--primary-color) !important;
+    font-weight: 800 !important;
+    border-radius: 6px;
+}
+
+.past-row {
+    opacity: 0.4;
+    filter: grayscale(0.8);
+}
+
+.past-row td {
+    text-decoration: line-through;
+}
+
+/* Duas Accordion */
+.duas-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dua-item {
+    padding: 0;
+    overflow: hidden;
+}
+
+.dua-item summary {
+    list-style: none;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dua-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.dua-item[open] summary {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dua-content {
+    padding: 15px 18px;
+    background: #fafafa;
+}
+
+.arabic {
+    font-size: 1.1rem;
+    text-align: right;
+    margin-bottom: 8px;
+    color: #111;
+    line-height: 1.8;
+    font-family: 'Outfit', sans-serif;
+}
+
+.translation {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.instagram-link {
+    color: #E1306C;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Mobile Only Tweaks */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.45rem;
+    }
+
+    .compact-header {
+        padding: 10px 0;
+    }
+
+    .main-card {
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+
+    .time-block span {
+        font-size: 1.8rem;
+    }
+
+    td,
+    th {
+        padding: 6px 4px;
+        font-size: 0.65rem;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3),
+    th:nth-child(4),
+    td:nth-child(4) {
+        width: 62px;
+    }
+
+    /* Tighter 12h mobile */
+}
