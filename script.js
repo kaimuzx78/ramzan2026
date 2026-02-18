@@ -155,7 +155,7 @@ function updateTimer() {
 function initShare() {
     const shareBtn = document.getElementById('whatsapp-share');
     shareBtn.addEventListener('click', () => {
-        const text = encodeURIComponent("🌙 Ramzan Mubarak! Check out the 2026 Ramzan Timetable for Mumbai here: " + window.location.href);
+        const text = encodeURIComponent("🌙 Ramzan Mubarak! Check out the 2026 Ramzan Timetable for Mumbai here: https://is.gd/ramzan2026");
         window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
     });
 }
@@ -171,10 +171,50 @@ function initAccordion() {
     });
 }
 
+function initPWA() {
+    let deferredPrompt;
+    const installBtn = document.getElementById('pwa-install');
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('SW Registered'))
+                .catch(err => console.log('SW Failed', err));
+        });
+    }
+
+    // Handle Install Prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBtn) installBtn.style.display = 'flex';
+    });
+
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+    }
+
+    window.addEventListener('appinstalled', () => {
+        if (installBtn) installBtn.style.display = 'none';
+        console.log('App Installed');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     populateTable();
     updateTimer();
     initShare();
     initAccordion();
+    initPWA();
     setInterval(updateTimer, 1000);
 });

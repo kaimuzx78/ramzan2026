@@ -92,25 +92,41 @@ h1 {
     color: var(--primary-color);
 }
 
-.share-btn {
-    background: var(--whatsapp-green);
-    color: white;
+.header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.action-btn {
     border: none;
-    padding: 10px 18px;
-    border-radius: 30px;
-    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+    gap: 6px;
+    transition: all 0.2s ease;
     white-space: nowrap;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.share-btn:active {
-    transform: scale(0.94);
+.install-btn {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(27, 94, 32, 0.2);
+}
+
+.share-btn {
+    background: var(--whatsapp-green);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+}
+
+.action-btn:active {
+    transform: scale(0.96);
+    opacity: 0.9;
 }
 
 /* Unified Card System */

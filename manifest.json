@@ -1,0 +1,17 @@
+{
+  "name": "Ramzan 2026 Mumbai",
+  "short_name": "Ramzan 2026",
+  "description": "Mumbai Ramzan 2026 Timetable & Countdown",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdfaf2",
+  "theme_color": "#1b5e20",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2911/2911135.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
