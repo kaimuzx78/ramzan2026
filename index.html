@@ -33,7 +33,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
             text-align: center;
             cursor: pointer;
@@ -61,19 +61,22 @@
 
         .content-wrapper {
             max-width: 600px;
-            padding: 40px;
+            width: 90%;
+            padding: 30px;
             z-index: 1;
             animation: fadeIn 2s ease-out;
-            background: rgba(10, 25, 47, 0.6);
+            background: rgba(10, 25, 47, 0.7);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 20px;
         }
 
         .wisher-name {
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--eid-gold-light);
             margin-bottom: 10px;
             font-weight: 700;
@@ -83,14 +86,14 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: min(3.5rem, 10vw);
+            font-size: min(3.5rem, 12vw);
             color: var(--eid-gold);
             margin-bottom: 20px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 30px;
             opacity: 0.9;
@@ -106,15 +109,17 @@
         .primary-btn {
             background: linear-gradient(135deg, var(--eid-gold) 0%, #B8860B 100%);
             color: var(--eid-blue-dark);
-            padding: 15px 40px;
+            padding: 12px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 700;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
             border: none;
             cursor: pointer;
+            width: auto;
+            min-width: 200px;
         }
 
         .primary-btn:hover {
@@ -129,6 +134,8 @@
             opacity: 0.7;
             transition: opacity 0.3s ease;
             border-bottom: 1px solid transparent;
+            margin-top: 10px;
+            display: inline-block;
         }
 
         .secondary-link:hover {
@@ -143,35 +150,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 47, 0.9);
+            background: rgba(10, 25, 47, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 9999;
             backdrop-filter: blur(15px);
-            visibility: hidden;
+            -webkit-backdrop-filter: blur(15px);
             opacity: 0;
-            transition: all 0.5s ease;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
 
         #nameModal.active {
-            visibility: visible;
             opacity: 1;
+            pointer-events: auto;
         }
 
         .modal-content {
             background: var(--eid-blue-accent);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 25px;
             border: 1px solid var(--eid-gold);
             max-width: 90%;
-            width: 400px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .modal-content h2 {
             color: var(--eid-gold);
             margin-bottom: 20px;
             font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
         }
 
         #nameInput {
@@ -179,7 +190,7 @@
             padding: 12px 20px;
             border-radius: 25px;
             border: 1px solid var(--eid-gold);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: white;
             font-size: 1.1rem;
             margin-bottom: 20px;
@@ -190,24 +201,24 @@
         /* Lantern Animation */
         .lantern {
             position: absolute;
-            width: 60px;
-            height: 80px;
+            width: 50px;
+            height: 70px;
             background: var(--eid-gold);
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
             animation: swing 3s infinite ease-in-out;
             transform-origin: top center;
-            opacity: 0.6;
+            opacity: 0.4;
             pointer-events: none;
         }
 
-        .lantern.left { top: 20px; left: 10%; animation-delay: 0s; }
-        .lantern.right { top: 20px; right: 10%; animation-delay: 0.5s; }
+        .lantern.left { top: 10px; left: 5%; animation-delay: 0s; }
+        .lantern.right { top: 10px; right: 5%; animation-delay: 0.5s; }
 
         @keyframes swing {
-            0% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-            100% { transform: rotate(-5deg); }
+            0% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+            100% { transform: rotate(-8deg); }
         }
 
         @keyframes fadeIn {
@@ -216,7 +227,19 @@
         }
 
         .instagram-footer {
-            margin-top: 30px;
+            margin-top: 25px;
+        }
+
+        .visitor-counter {
+            margin-top: 15px;
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper { padding: 25px 20px; }
+            h1 { font-size: 2.8rem; }
+            .primary-btn { width: 100%; min-width: unset; }
         }
     </style>
 </head>
@@ -241,6 +264,9 @@
             <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="secondary-link" style="opacity: 0.8; font-weight: 700;">
                 <i class="fab fa-instagram"></i> @kaimu_zx78
             </a>
+            <div class="visitor-counter">
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkaimuzx78.github.io%2Framzan2026&count_bg=%23D4AF37&title_bg=%23172A45&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false" alt="Visitor Counter"/>
+            </div>
         </div>
     </div>
 
@@ -248,9 +274,9 @@
     <div id="nameModal">
         <div class="modal-content">
             <h2>Enter Your Name</h2>
-            <p style="margin-bottom: 15px; font-size: 0.9rem;">To create your personalized Eid greeting!</p>
+            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #aaa;">To create your personalized Eid greeting!</p>
             <input type="text" id="nameInput" placeholder="Type your name..." maxlength="20">
-            <button id="saveNameBtn" class="primary-btn" style="width: 100%;">Create My Greeting</button>
+            <button id="saveNameBtn" class="primary-btn" style="width: 100%; min-width: 100%;">Create My Greeting</button>
         </div>
     </div>
 
@@ -292,12 +318,12 @@
                 this.velocity.y *= this.friction;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                this.alpha -= 0.01;
+                this.alpha -= 0.015;
             }
         }
 
         function createFirework(x, y) {
-            const particleCount = 30;
+            const particleCount = 25;
             const colors = ['#D4AF37', '#F9E29B', '#FFFFFF', '#B8860B'];
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
@@ -317,11 +343,18 @@
             });
         }
 
-        window.addEventListener('click', (e) => {
+        window.addEventListener('mousedown', (e) => {
             if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
                 createFirework(e.clientX, e.clientY);
             }
         });
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
+                const touch = e.touches[0];
+                createFirework(touch.clientX, touch.clientY);
+            }
+        }, { passive: true });
 
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
@@ -340,12 +373,14 @@
             if (wisherName) {
                 wisherDisplay.innerText = decodeURIComponent(wisherName);
                 document.getElementById('greeting').innerText = "Wishing You Eid Mubarak!";
+                nameModal.classList.remove('active');
             } else {
-                // No name in URL, show modal to create their own
-                setTimeout(() => nameModal.classList.add('active'), 1000);
+                // No name in URL, show modal immediately for mobile
+                nameModal.classList.add('active');
             }
 
-            saveNameBtn.addEventListener('click', () => {
+            saveNameBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 const name = nameInput.value.trim();
                 if (name) {
                     const newUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(name);
@@ -355,10 +390,15 @@
 
             shareBtn.addEventListener('click', () => {
                 const currentName = wisherName || "A Friend";
-                const shareUrl = window.location.href;
+                const shareUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(currentName);
                 const text = encodeURIComponent(`*${currentName}* has sent you a special Eid greeting! 🌙✨\n\nOpen it here and see the magic: ${shareUrl}`);
                 window.open(`https://wa.me/?text=${text}`, '_blank');
             });
+            
+            // Auto focus input
+            setTimeout(() => {
+                if (nameModal.classList.contains('active')) nameInput.focus();
+            }, 600);
         });
     </script>
 </body>
