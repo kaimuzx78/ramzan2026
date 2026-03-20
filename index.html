@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eid Mubarak - Ramzan 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -36,7 +37,6 @@
             overflow-x: hidden;
             position: relative;
             text-align: center;
-            cursor: pointer;
         }
 
         #fireworks-canvas {
@@ -71,7 +71,7 @@
             border-radius: 30px;
             border: 1px solid rgba(212, 175, 55, 0.3);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            margin: 20px;
+            margin: 20px auto;
         }
 
         .wisher-name {
@@ -119,7 +119,7 @@
             border: none;
             cursor: pointer;
             width: auto;
-            min-width: 200px;
+            min-width: 220px;
         }
 
         .primary-btn:hover {
@@ -150,32 +150,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 47, 0.95);
-            display: flex;
+            background: rgba(10, 25, 47, 0.98);
+            display: none; /* Changed from visibility/opacity */
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
         }
 
         #nameModal.active {
-            opacity: 1;
-            pointer-events: auto;
+            display: flex;
         }
 
         .modal-content {
             background: var(--eid-blue-accent);
             padding: 30px;
             border-radius: 25px;
-            border: 1px solid var(--eid-gold);
+            border: 2px solid var(--eid-gold);
             max-width: 90%;
             width: 350px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-content h2 {
@@ -187,15 +189,19 @@
 
         #nameInput {
             width: 100%;
-            padding: 12px 20px;
+            padding: 15px;
             border-radius: 25px;
-            border: 1px solid var(--eid-gold);
-            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--eid-gold);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
             outline: none;
             text-align: center;
+        }
+
+        #nameInput::placeholder {
+            color: rgba(255, 255, 255, 0.3);
         }
 
         /* Lantern Animation */
@@ -237,9 +243,10 @@
         }
 
         @media (max-width: 480px) {
-            .content-wrapper { padding: 25px 20px; }
-            h1 { font-size: 2.8rem; }
+            .content-wrapper { padding: 25px 15px; width: 92%; }
+            h1 { font-size: 2.6rem; }
             .primary-btn { width: 100%; min-width: unset; }
+            .modal-content { padding: 25px 20px; }
         }
     </style>
 </head>
@@ -253,10 +260,11 @@
     <div class="content-wrapper">
         <span id="wisher-name" class="wisher-name"></span>
         <h1 id="greeting">Eid Mubarak!</h1>
-        <p>May this special day bring peace, happiness, and prosperity to you and your family. Wishing you a joyous celebration filled with love and blessings.</p>
+        <p id="sub-greeting">May this special day bring peace, happiness, and prosperity to you and your family. Wishing you a joyous celebration filled with love and blessings.</p>
         
         <div class="btn-container">
             <button id="share-btn" class="primary-btn">Share the Joy</button>
+            <button id="create-own-btn" class="secondary-link" style="background:none; border:none; cursor:pointer;">Create Your Own Greeting</button>
             <a href="index1.html" class="secondary-link">View Ramadan 2026 Calendar</a>
         </div>
 
@@ -274,8 +282,8 @@
     <div id="nameModal">
         <div class="modal-content">
             <h2>Enter Your Name</h2>
-            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #aaa;">To create your personalized Eid greeting!</p>
-            <input type="text" id="nameInput" placeholder="Type your name..." maxlength="20">
+            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #aaa;">To create your personalized Eid greeting for friends and family!</p>
+            <input type="text" id="nameInput" placeholder="Your Name" maxlength="20">
             <button id="saveNameBtn" class="primary-btn" style="width: 100%; min-width: 100%;">Create My Greeting</button>
         </div>
     </div>
@@ -307,7 +315,7 @@
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
                 ctx.fill();
                 ctx.restore();
@@ -318,12 +326,12 @@
                 this.velocity.y *= this.friction;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                this.alpha -= 0.015;
+                this.alpha -= 0.02;
             }
         }
 
         function createFirework(x, y) {
-            const particleCount = 25;
+            const particleCount = 20;
             const colors = ['#D4AF37', '#F9E29B', '#FFFFFF', '#B8860B'];
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
@@ -343,7 +351,7 @@
             });
         }
 
-        window.addEventListener('mousedown', (e) => {
+        window.addEventListener('click', (e) => {
             if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
                 createFirework(e.clientX, e.clientY);
             }
@@ -361,7 +369,7 @@
         animate();
 
         // Personalized Logic
-        document.addEventListener('DOMContentLoaded', () => {
+        function initGreeting() {
             const urlParams = new URLSearchParams(window.location.search);
             const wisherName = urlParams.get('name');
             const wisherDisplay = document.getElementById('wisher-name');
@@ -369,23 +377,29 @@
             const nameInput = document.getElementById('nameInput');
             const saveNameBtn = document.getElementById('saveNameBtn');
             const shareBtn = document.getElementById('share-btn');
+            const createOwnBtn = document.getElementById('create-own-btn');
 
-            if (wisherName) {
+            if (wisherName && wisherName.trim() !== "") {
                 wisherDisplay.innerText = decodeURIComponent(wisherName);
                 document.getElementById('greeting').innerText = "Wishing You Eid Mubarak!";
                 nameModal.classList.remove('active');
             } else {
-                // No name in URL, show modal immediately for mobile
+                console.log("No name found, showing modal");
+                nameModal.style.display = 'flex';
                 nameModal.classList.add('active');
             }
 
             saveNameBtn.addEventListener('click', (e) => {
-                e.preventDefault();
                 const name = nameInput.value.trim();
                 if (name) {
                     const newUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(name);
                     window.location.href = newUrl;
                 }
+            });
+
+            createOwnBtn.addEventListener('click', () => {
+                nameModal.style.display = 'flex';
+                nameModal.classList.add('active');
             });
 
             shareBtn.addEventListener('click', () => {
@@ -394,12 +408,20 @@
                 const text = encodeURIComponent(`*${currentName}* has sent you a special Eid greeting! 🌙✨\n\nOpen it here and see the magic: ${shareUrl}`);
                 window.open(`https://wa.me/?text=${text}`, '_blank');
             });
-            
-            // Auto focus input
-            setTimeout(() => {
-                if (nameModal.classList.contains('active')) nameInput.focus();
-            }, 600);
-        });
+
+            // Handle Enter key
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') saveNameBtn.click();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initGreeting);
+        // Fallback for some browsers
+        window.onload = () => {
+            if (!document.getElementById('nameModal').classList.contains('active') && !window.location.search.includes('name=')) {
+                initGreeting();
+            }
+        };
     </script>
 </body>
 </html>
