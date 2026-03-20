@@ -6,7 +6,7 @@
     <title>Eid Mubarak - Ramzan 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="manifest" href="manifest.json">
     <style>
@@ -37,6 +37,7 @@
             overflow-x: hidden;
             position: relative;
             text-align: center;
+            perspective: 1500px;
         }
 
         #bg-canvas {
@@ -65,42 +66,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(23, 42, 69, 0.4) 0%, var(--eid-blue-dark) 100%);
+            background: radial-gradient(circle at center, rgba(23, 42, 69, 0.5) 0%, var(--eid-blue-dark) 100%);
             z-index: -1;
         }
 
         .content-wrapper {
             max-width: 600px;
             width: 90%;
-            padding: 40px 30px;
+            padding: 45px 30px;
             z-index: 10;
-            background: rgba(10, 25, 47, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 40px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            background: rgba(10, 25, 47, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 45px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
             margin: 20px auto;
             transform-style: preserve-3d;
-            perspective: 1000px;
-            transition: transform 0.1s ease-out;
+            transition: transform 0.2s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+            cursor: grab;
+        }
+
+        .content-wrapper:active {
+            cursor: grabbing;
         }
 
         .wisher-name {
             display: block;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: clamp(2rem, 8vw, 3.2rem);
+            margin-bottom: 12px;
             font-weight: 900;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            background: linear-gradient(to right, var(--eid-gold), var(--eid-gold-light), #FFF, var(--eid-gold-light), var(--eid-gold));
+            background: linear-gradient(90deg, #D4AF37, #F9E29B, #D4AF37, #FFF, #D4AF37);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
-            animation: shine 3s linear infinite, float 4s infinite ease-in-out;
-            transform: translateZ(50px);
+            text-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            animation: shine 2.5s linear infinite, float 3s infinite ease-in-out;
+            transform: translateZ(100px);
+            font-family: 'Playfair Display', serif;
         }
 
         @keyframes shine {
@@ -108,72 +114,76 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateZ(50px) translateY(0); }
-            50% { transform: translateZ(50px) translateY(-8px); }
+            0%, 100% { transform: translateZ(100px) translateY(0); }
+            50% { transform: translateZ(100px) translateY(-12px); }
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: min(4rem, 14vw);
+            font-size: min(3.8rem, 13vw);
             color: var(--eid-gold);
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-            transform: translateZ(30px);
+            text-shadow: 0 0 35px rgba(212, 175, 55, 0.7);
+            transform: translateZ(60px);
+            font-weight: 900;
         }
 
         p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 35px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
             opacity: 0.95;
-            transform: translateZ(10px);
+            transform: translateZ(30px);
+            color: #AFC1D6;
         }
 
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
             align-items: center;
-            transform: translateZ(20px);
+            transform: translateZ(50px);
         }
 
         .primary-btn {
             background: linear-gradient(135deg, var(--eid-gold) 0%, #B8860B 100%);
             color: var(--eid-blue-dark);
-            padding: 15px 45px;
+            padding: 16px 50px;
             border-radius: 60px;
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 800;
+            font-size: 1.25rem;
+            font-weight: 900;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
             border: none;
             cursor: pointer;
             width: auto;
-            min-width: 250px;
+            min-width: 260px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .primary-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.7);
         }
 
         .secondary-link {
             color: var(--eid-gold-light);
             text-decoration: none;
-            font-size: 0.95rem;
-            opacity: 0.8;
+            font-size: 1rem;
+            opacity: 0.85;
             transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
+            border-bottom: 1.5px solid transparent;
             margin-top: 10px;
             display: inline-block;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .secondary-link:hover {
             opacity: 1;
             color: white;
-            border-bottom: 1px solid var(--eid-gold-light);
+            border-bottom: 1.5px solid var(--eid-gold-light);
         }
 
         /* Modal Styles */
@@ -183,13 +193,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 47, 0.98);
+            background: rgba(10, 25, 47, 0.99);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 100000;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
         }
 
         #nameModal.active {
@@ -198,18 +208,18 @@
 
         .modal-content {
             background: var(--eid-blue-accent);
-            padding: 40px;
-            border-radius: 35px;
-            border: 2px solid var(--eid-gold);
+            padding: 45px;
+            border-radius: 40px;
+            border: 3px solid var(--eid-gold);
             max-width: 90%;
-            width: 400px;
+            width: 420px;
             text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,1);
-            animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 40px 100px rgba(0,0,0,1);
+            animation: modalPop 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes modalPop {
-            from { transform: scale(0.6) translateY(50px); opacity: 0; }
+            from { transform: scale(0.5) translateY(100px); opacity: 0; }
             to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
@@ -217,84 +227,87 @@
             color: var(--eid-gold);
             margin-bottom: 15px;
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            font-weight: 900;
         }
 
         #nameInput {
             width: 100%;
-            padding: 20px;
-            border-radius: 35px;
+            padding: 22px;
+            border-radius: 40px;
             border: 2px solid var(--eid-gold);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             color: white;
-            font-size: 1.4rem;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            margin-bottom: 35px;
             outline: none;
             text-align: center;
+            font-weight: 700;
         }
 
         /* Lantern Animation */
         .lantern {
             position: absolute;
-            width: 60px;
-            height: 80px;
+            width: 65px;
+            height: 85px;
             background: var(--eid-gold);
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
-            animation: swing 4s infinite ease-in-out;
+            animation: swing 4.5s infinite ease-in-out;
             transform-origin: top center;
-            opacity: 0.6;
+            opacity: 0.65;
             pointer-events: none;
             z-index: 5;
         }
 
-        .lantern.left { top: 20px; left: 10%; animation-delay: 0s; }
-        .lantern.right { top: 20px; right: 10%; animation-delay: 0.5s; }
+        .lantern.left { top: 25px; left: 12%; animation-delay: 0s; }
+        .lantern.right { top: 25px; right: 12%; animation-delay: 0.7s; }
 
         @keyframes swing {
-            0% { transform: rotate(-12deg); }
-            50% { transform: rotate(12deg); }
-            100% { transform: rotate(-12deg); }
+            0% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+            100% { transform: rotate(-15deg); }
         }
 
         .instagram-footer {
-            margin-top: 40px;
-            transform: translateZ(10px);
+            margin-top: 45px;
+            transform: translateZ(20px);
         }
 
         .highlight-link {
-            background: rgba(212, 175, 55, 0.15);
-            padding: 10px 22px;
-            border-radius: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(212, 175, 55, 0.2);
+            padding: 12px 25px;
+            border-radius: 35px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transition: all 0.4s ease;
         }
 
         .highlight-link:hover {
-            background: rgba(212, 175, 55, 0.25);
+            background: rgba(212, 175, 55, 0.3);
             border-color: var(--eid-gold);
-            transform: scale(1.08) translateY(-2px);
+            transform: scale(1.1) translateY(-4px);
         }
 
         .visitor-counter {
             margin-top: 25px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 14px 30px;
             border-radius: 60px;
             display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 480px) {
-            .content-wrapper { padding: 35px 20px; width: 94%; }
-            h1 { font-size: 3rem; }
-            .primary-btn { width: 100%; min-width: unset; }
-            .modal-content { padding: 35px 25px; }
+            .content-wrapper { padding: 40px 15px; width: 94%; }
+            h1 { font-size: 2.8rem; }
+            .primary-btn { width: 100%; min-width: unset; padding: 16px 20px; }
+            .modal-content { padding: 40px 20px; }
             .lantern { width: 45px; height: 60px; }
+            .wisher-name { font-size: 2.5rem; letter-spacing: 3px; }
         }
     </style>
 </head>
@@ -319,8 +332,8 @@
 
         <div class="instagram-footer">
             <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="highlight-link">
-                <i class="fab fa-instagram" style="color: var(--eid-gold); font-size: 1.2rem;"></i> 
-                <span style="color: var(--eid-gold-light); font-weight: 800; font-size: 1rem;">@kaimu_zx78</span>
+                <i class="fab fa-instagram" style="color: var(--eid-gold); font-size: 1.4rem;"></i> 
+                <span style="color: var(--eid-gold-light); font-weight: 900; font-size: 1.05rem;">@kaimu_zx78</span>
             </a>
             <br>
             <div class="visitor-counter">
@@ -333,7 +346,7 @@
     <div id="nameModal">
         <div class="modal-content">
             <h2>Enter Your Name</h2>
-            <p style="margin-bottom: 30px; font-size: 1rem; color: #bbb;">Create your extraordinary 3D Eid greeting for friends and family!</p>
+            <p style="margin-bottom: 30px; font-size: 1.1rem; color: #bbb;">Create your extraordinary 3D Eid greeting!</p>
             <input type="text" id="nameInput" placeholder="Enter Your Name" maxlength="20">
             <button id="saveNameBtn" class="primary-btn" style="width: 100%; min-width: 100%;">Create My Greeting</button>
         </div>
@@ -344,7 +357,7 @@
         // Three.js Optimized Starfield Background
         const bgCanvas = document.getElementById('bg-canvas');
         const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: false });
-        renderer.setPixelRatio(window.devicePixelRatio > 1 ? 1.5 : 1); // Performance optimization
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(window.innerWidth, window.innerHeight);
 
         const scene = new THREE.Scene();
@@ -353,25 +366,25 @@
 
         const geometry = new THREE.BufferGeometry();
         const vertices = [];
-        const particleCount = 2000;
+        const particleCount = 2500;
 
         for (let i = 0; i < particleCount; i++) {
             vertices.push(
-                THREE.MathUtils.randFloatSpread(1000),
-                THREE.MathUtils.randFloatSpread(1000),
-                THREE.MathUtils.randFloatSpread(1000)
+                THREE.MathUtils.randFloatSpread(1500),
+                THREE.MathUtils.randFloatSpread(1500),
+                THREE.MathUtils.randFloatSpread(1500)
             );
         }
 
         geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const material = new THREE.PointsMaterial({ color: 0xD4AF37, size: 2, sizeAttenuation: true, transparent: true, opacity: 0.6 });
+        const material = new THREE.PointsMaterial({ color: 0xD4AF37, size: 2.5, sizeAttenuation: true, transparent: true, opacity: 0.7 });
         const stars = new THREE.Points(geometry, material);
         scene.add(stars);
 
         function animateBg() {
             requestAnimationFrame(animateBg);
-            stars.rotation.y += 0.0005;
-            stars.rotation.x += 0.0003;
+            stars.rotation.y += 0.0008;
+            stars.rotation.x += 0.0005;
             renderer.render(scene, camera);
         }
 
@@ -382,90 +395,111 @@
         });
         animateBg();
 
-        // Fireworks Canvas Logic
+        // Fireworks Logic
         const fwCanvas = document.getElementById('fireworks-canvas');
         const fwCtx = fwCanvas.getContext('2d');
-        let particles = [];
+        let fwParticles = [];
 
         function resizeFwCanvas() {
             fwCanvas.width = window.innerWidth;
             fwCanvas.height = window.innerHeight;
         }
 
-        class Particle {
+        class FwParticle {
             constructor(x, y, color) {
                 this.x = x; this.y = y; this.color = color;
-                this.velocity = { x: (Math.random() - 0.5) * 12, y: (Math.random() - 0.5) * 12 };
-                this.alpha = 1; this.friction = 0.96;
+                this.velocity = { x: (Math.random() - 0.5) * 15, y: (Math.random() - 0.5) * 15 };
+                this.alpha = 1; this.friction = 0.95;
             }
             draw() {
                 fwCtx.save(); fwCtx.globalAlpha = this.alpha; fwCtx.beginPath();
-                fwCtx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+                fwCtx.arc(this.x, this.y, 3, 0, Math.PI * 2);
                 fwCtx.fillStyle = this.color; fwCtx.fill(); fwCtx.restore();
             }
             update() {
                 this.velocity.x *= this.friction; this.velocity.y *= this.friction;
                 this.x += this.velocity.x; this.y += this.velocity.y;
-                this.alpha -= 0.015;
+                this.alpha -= 0.02;
             }
         }
 
         function createFirework(x, y) {
             const colors = ['#D4AF37', '#F9E29B', '#FFFFFF', '#B8860B'];
-            for (let i = 0; i < 25; i++) {
-                particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+            for (let i = 0; i < 30; i++) {
+                fwParticles.push(new FwParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
             }
         }
 
         function animateFw() {
             requestAnimationFrame(animateFw);
             fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
-            particles.forEach((p, i) => {
+            fwParticles.forEach((p, i) => {
                 if (p.alpha > 0) { p.update(); p.draw(); }
-                else { particles.splice(i, 1); }
+                else { fwParticles.splice(i, 1); }
             });
         }
         resizeFwCanvas();
         animateFw();
 
-        // 3D Tilt Effect Logic (Lag-Free)
+        // Enhanced 3D Tilt & Touch Logic
         const card = document.getElementById('card');
-        const handleTilt = (e) => {
+        let isMoving = false;
+
+        const applyTilt = (x, y) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const relX = x - rect.left;
+            const relY = y - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotX = (y - centerY) / 20;
-            const rotY = (centerX - x) / 20;
-            card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+            
+            // Increased rotation for "extreme" 3D feel
+            const rotX = (centerY - relY) / 10;
+            const rotY = (relX - centerX) / 10;
+            
+            card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.05, 1.05, 1.05)`;
         };
-        const resetTilt = () => { card.style.transform = `rotateX(0deg) rotateY(0deg)`; };
 
-        if (!/Android|iPhone/i.test(navigator.userAgent)) {
-            card.addEventListener('mousemove', handleTilt);
-            card.addEventListener('mouseleave', resetTilt);
-        } else {
-            // Mobile Device Orientation Fallback (Subtle)
+        const resetTilt = () => {
+            card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        };
+
+        // Desktop
+        card.addEventListener('mousemove', (e) => applyTilt(e.clientX, e.clientY));
+        card.addEventListener('mouseleave', resetTilt);
+
+        // Mobile Touch-Drag
+        card.addEventListener('touchstart', (e) => {
+            isMoving = true;
+            const touch = e.touches[0];
+            applyTilt(touch.clientX, touch.clientY);
+        }, { passive: true });
+
+        card.addEventListener('touchmove', (e) => {
+            if (!isMoving) return;
+            const touch = e.touches[0];
+            applyTilt(touch.clientX, touch.clientY);
+        }, { passive: true });
+
+        card.addEventListener('touchend', () => {
+            isMoving = false;
+            resetTilt();
+        });
+
+        // Device Orientation Fallback (Stronger)
+        if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
-                const rotX = e.beta / 10;
-                const rotY = e.gamma / 10;
+                if (isMoving) return; // Touch takes priority
+                const rotX = e.beta ? (e.beta - 45) / 4 : 0; // Better range for portrait
+                const rotY = e.gamma ? e.gamma / 4 : 0;
                 card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
             });
         }
 
         window.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
+            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT' && !card.contains(e.target)) {
                 createFirework(e.clientX, e.clientY);
             }
         });
-
-        window.addEventListener('touchstart', (e) => {
-            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
-                const touch = e.touches[0];
-                createFirework(touch.clientX, touch.clientY);
-            }
-        }, { passive: true });
 
         // Personalized Logic
         function initGreeting() {
@@ -512,6 +546,10 @@
                     const text = encodeURIComponent(`*${wisherName}* has sent you an extraordinary 3D Eid greeting! 🎆✨\n\nSee the magic here: ${window.location.href}`);
                     window.open(`https://wa.me/?text=${text}`, '_blank');
                 }
+            });
+
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') saveNameBtn.click();
             });
         }
         document.addEventListener('DOMContentLoaded', initGreeting);
