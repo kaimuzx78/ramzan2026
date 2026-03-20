@@ -36,6 +36,17 @@
             overflow: hidden;
             position: relative;
             text-align: center;
+            cursor: pointer;
+        }
+
+        #fireworks-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         .background-overlay {
@@ -53,18 +64,33 @@
             padding: 40px;
             z-index: 1;
             animation: fadeIn 2s ease-out;
+            background: rgba(10, 25, 47, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .wisher-name {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--eid-gold-light);
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: min(4rem, 12vw);
+            font-size: min(3.5rem, 10vw);
             color: var(--eid-gold);
             margin-bottom: 20px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 30px;
             opacity: 0.9;
@@ -87,6 +113,8 @@
             font-weight: 700;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
         .primary-btn:hover {
@@ -108,6 +136,57 @@
             border-bottom: 1px solid var(--eid-gold-light);
         }
 
+        /* Modal Styles */
+        #nameModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        #nameModal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--eid-blue-accent);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--eid-gold);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        .modal-content h2 {
+            color: var(--eid-gold);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        #nameInput {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid var(--eid-gold);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            outline: none;
+            text-align: center;
+        }
+
         /* Lantern Animation */
         .lantern {
             position: absolute;
@@ -119,6 +198,7 @@
             animation: swing 3s infinite ease-in-out;
             transform-origin: top center;
             opacity: 0.6;
+            pointer-events: none;
         }
 
         .lantern.left { top: 20px; left: 10%; animation-delay: 0s; }
@@ -135,38 +215,25 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Confetti styles */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: var(--eid-gold);
-            opacity: 0.7;
-            border-radius: 50%;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-
         .instagram-footer {
-            margin-top: 40px;
+            margin-top: 30px;
         }
     </style>
 </head>
-<body>
+<body id="body">
+    <canvas id="fireworks-canvas"></canvas>
     <div class="background-overlay"></div>
     
     <div class="lantern left"></div>
     <div class="lantern right"></div>
 
     <div class="content-wrapper">
+        <span id="wisher-name" class="wisher-name"></span>
         <h1 id="greeting">Eid Mubarak!</h1>
         <p>May this special day bring peace, happiness, and prosperity to you and your family. Wishing you a joyous celebration filled with love and blessings.</p>
         
         <div class="btn-container">
-            <a href="https://wa.me/?text=Eid%20Mubarak!%20Wishing%20you%20a%20joyous%20day.%20Check%20this%20out:%20" class="primary-btn" id="share-btn">Share the Joy</a>
+            <button id="share-btn" class="primary-btn">Share the Joy</button>
             <a href="index1.html" class="secondary-link">View Ramadan 2026 Calendar</a>
         </div>
 
@@ -177,53 +244,121 @@
         </div>
     </div>
 
+    <!-- Modal for Name Input -->
+    <div id="nameModal">
+        <div class="modal-content">
+            <h2>Enter Your Name</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9rem;">To create your personalized Eid greeting!</p>
+            <input type="text" id="nameInput" placeholder="Type your name..." maxlength="20">
+            <button id="saveNameBtn" class="primary-btn" style="width: 100%;">Create My Greeting</button>
+        </div>
+    </div>
+
     <script>
+        const canvas = document.getElementById('fireworks-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 8,
+                    y: (Math.random() - 0.5) * 8
+                };
+                this.alpha = 1;
+                this.friction = 0.95;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.01;
+            }
+        }
+
+        function createFirework(x, y) {
+            const particleCount = 30;
+            const colors = ['#D4AF37', '#F9E29B', '#FFFFFF', '#B8860B'];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((particle, i) => {
+                if (particle.alpha > 0) {
+                    particle.update();
+                    particle.draw();
+                } else {
+                    particles.splice(i, 1);
+                }
+            });
+        }
+
+        window.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A' && e.target.tagName !== 'INPUT') {
+                createFirework(e.clientX, e.clientY);
+            }
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+
+        // Personalized Logic
         document.addEventListener('DOMContentLoaded', () => {
-            // Confetti effect
-            const body = document.body;
-            const colors = ['#D4AF37', '#F9E29B', '#E6F1FF', '#B8860B'];
-            
-            function createConfetti() {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                
-                // Random properties
-                const size = Math.random() * 8 + 4;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const left = Math.random() * 100;
-                const duration = Math.random() * 3 + 2;
-                const delay = Math.random() * 5;
-                
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                confetti.style.backgroundColor = color;
-                confetti.style.left = `${left}%`;
-                confetti.style.top = `-20px`;
-                confetti.style.animationDuration = `${duration}s`;
-                confetti.style.animationDelay = `${delay}s`;
-                
-                body.appendChild(confetti);
-                
-                // Remove after animation
-                setTimeout(() => {
-                    confetti.remove();
-                }, (duration + delay) * 1000);
-            }
-
-            // Initial burst
-            for (let i = 0; i < 50; i++) {
-                createConfetti();
-            }
-
-            // Continuous flow
-            setInterval(createConfetti, 200);
-
-            // Update share link with current URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const wisherName = urlParams.get('name');
+            const wisherDisplay = document.getElementById('wisher-name');
+            const nameModal = document.getElementById('nameModal');
+            const nameInput = document.getElementById('nameInput');
+            const saveNameBtn = document.getElementById('saveNameBtn');
             const shareBtn = document.getElementById('share-btn');
-            if (shareBtn) {
-                const currentUrl = window.location.href;
-                shareBtn.href = `https://wa.me/?text=Eid%20Mubarak!%20Wishing%20you%20a%20joyous%20day.%20Check%20this%20out:%20${encodeURIComponent(currentUrl)}`;
+
+            if (wisherName) {
+                wisherDisplay.innerText = decodeURIComponent(wisherName);
+                document.getElementById('greeting').innerText = "Wishing You Eid Mubarak!";
+            } else {
+                // No name in URL, show modal to create their own
+                setTimeout(() => nameModal.classList.add('active'), 1000);
             }
+
+            saveNameBtn.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name) {
+                    const newUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(name);
+                    window.location.href = newUrl;
+                }
+            });
+
+            shareBtn.addEventListener('click', () => {
+                const currentName = wisherName || "A Friend";
+                const shareUrl = window.location.href;
+                const text = encodeURIComponent(`*${currentName}* has sent you a special Eid greeting! 🌙✨\n\nOpen it here and see the magic: ${shareUrl}`);
+                window.open(`https://wa.me/?text=${text}`, '_blank');
+            });
         });
     </script>
 </body>
