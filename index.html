@@ -62,41 +62,51 @@
         .content-wrapper {
             max-width: 600px;
             width: 90%;
-            padding: 30px;
+            padding: 35px 30px;
             z-index: 1;
             animation: fadeIn 2s ease-out;
-            background: rgba(10, 25, 47, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
+            background: rgba(10, 25, 47, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 35px;
             border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
             margin: 20px auto;
         }
 
         .wisher-name {
             display: block;
-            font-size: 1.2rem;
-            color: var(--eid-gold-light);
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            background: linear-gradient(to right, var(--eid-gold), var(--eid-gold-light), var(--eid-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            animation: glow 3s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+            50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: min(3.5rem, 12vw);
+            font-size: min(3.8rem, 13vw);
             color: var(--eid-gold);
             margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
         }
 
         p {
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 30px;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .btn-container {
@@ -109,37 +119,41 @@
         .primary-btn {
             background: linear-gradient(135deg, var(--eid-gold) 0%, #B8860B 100%);
             color: var(--eid-blue-dark);
-            padding: 12px 35px;
+            padding: 14px 40px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.15rem;
+            font-weight: 800;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
             border: none;
             cursor: pointer;
             width: auto;
-            min-width: 220px;
+            min-width: 240px;
+            position: relative;
+            overflow: hidden;
         }
 
         .primary-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 45px rgba(212, 175, 55, 0.5);
         }
 
         .secondary-link {
             color: var(--eid-gold-light);
             text-decoration: none;
             font-size: 0.9rem;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            opacity: 0.8;
+            transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
             margin-top: 10px;
             display: inline-block;
+            font-weight: 600;
         }
 
         .secondary-link:hover {
             opacity: 1;
+            color: white;
             border-bottom: 1px solid var(--eid-gold-light);
         }
 
@@ -151,12 +165,12 @@
             width: 100%;
             height: 100%;
             background: rgba(10, 25, 47, 0.98);
-            display: none; /* Changed from visibility/opacity */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         #nameModal.active {
@@ -165,88 +179,114 @@
 
         .modal-content {
             background: var(--eid-blue-accent);
-            padding: 30px;
-            border-radius: 25px;
+            padding: 35px;
+            border-radius: 30px;
             border: 2px solid var(--eid-gold);
             max-width: 90%;
-            width: 350px;
+            width: 380px;
             text-align: center;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
-            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes modalPop {
-            from { transform: scale(0.8); opacity: 0; }
+            from { transform: scale(0.7); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .modal-content h2 {
             color: var(--eid-gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         #nameInput {
             width: 100%;
-            padding: 15px;
-            border-radius: 25px;
+            padding: 18px;
+            border-radius: 30px;
             border: 2px solid var(--eid-gold);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 25px;
             outline: none;
             text-align: center;
+            transition: border-color 0.3s;
         }
 
-        #nameInput::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+        #nameInput:focus {
+            border-color: var(--eid-gold-light);
+            background: rgba(255, 255, 255, 0.12);
         }
 
         /* Lantern Animation */
         .lantern {
             position: absolute;
-            width: 50px;
-            height: 70px;
+            width: 55px;
+            height: 75px;
             background: var(--eid-gold);
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
-            animation: swing 3s infinite ease-in-out;
+            animation: swing 4s infinite ease-in-out;
             transform-origin: top center;
-            opacity: 0.4;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        .lantern.left { top: 10px; left: 5%; animation-delay: 0s; }
-        .lantern.right { top: 10px; right: 5%; animation-delay: 0.5s; }
+        .lantern.left { top: 15px; left: 8%; animation-delay: 0s; }
+        .lantern.right { top: 15px; right: 8%; animation-delay: 0.5s; }
 
         @keyframes swing {
-            0% { transform: rotate(-8deg); }
-            50% { transform: rotate(8deg); }
-            100% { transform: rotate(-8deg); }
+            0% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+            100% { transform: rotate(-10deg); }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .instagram-footer {
-            margin-top: 25px;
+            margin-top: 30px;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 20px;
+        }
+
+        .highlight-link {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 8px 18px;
+            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--eid-gold);
+            transform: scale(1.05);
         }
 
         .visitor-counter {
-            margin-top: 15px;
-            opacity: 0.7;
-            font-size: 0.8rem;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 480px) {
-            .content-wrapper { padding: 25px 15px; width: 92%; }
-            h1 { font-size: 2.6rem; }
+            .content-wrapper { padding: 30px 20px; width: 92%; }
+            h1 { font-size: 2.8rem; }
             .primary-btn { width: 100%; min-width: unset; }
-            .modal-content { padding: 25px 20px; }
+            .modal-content { padding: 30px 25px; }
         }
     </style>
 </head>
@@ -260,7 +300,7 @@
     <div class="content-wrapper">
         <span id="wisher-name" class="wisher-name"></span>
         <h1 id="greeting">Eid Mubarak!</h1>
-        <p id="sub-greeting">May this special day bring peace, happiness, and prosperity to you and your family. Wishing you a joyous celebration filled with love and blessings.</p>
+        <p id="sub-greeting">Wishing you a joyous celebration filled with love and blessings. May this special day bring peace and prosperity to you and your family.</p>
         
         <div class="btn-container">
             <button id="share-btn" class="primary-btn">Share the Joy</button>
@@ -269,11 +309,13 @@
         </div>
 
         <div class="instagram-footer">
-            <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="secondary-link" style="opacity: 0.8; font-weight: 700;">
-                <i class="fab fa-instagram"></i> @kaimu_zx78
+            <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="highlight-link">
+                <i class="fab fa-instagram" style="color: var(--eid-gold);"></i> 
+                <span style="color: var(--eid-gold-light); font-weight: 700; font-size: 0.9rem;">@kaimu_zx78</span>
             </a>
+            <br>
             <div class="visitor-counter">
-                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkaimuzx78.github.io%2Framzan2026&count_bg=%23D4AF37&title_bg=%23172A45&icon=&icon_color=%23E7E7E7&title=Visitors&edge_flat=false" alt="Visitor Counter"/>
+                <img src="https://api.visitorbadge.io/api/combined?path=kaimuzx78-ramzan2026&label=VISITORS&labelColor=%23172a45&countColor=%23d4af37&style=flat&text=" alt="Visitor Counter"/>
             </div>
         </div>
     </div>
@@ -282,8 +324,8 @@
     <div id="nameModal">
         <div class="modal-content">
             <h2>Enter Your Name</h2>
-            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #aaa;">To create your personalized Eid greeting for friends and family!</p>
-            <input type="text" id="nameInput" placeholder="Your Name" maxlength="20">
+            <p style="margin-bottom: 25px; font-size: 0.95rem; color: #ccc;">Create your personalized Eid greeting for friends and family!</p>
+            <input type="text" id="nameInput" placeholder="Enter Your Name" maxlength="20">
             <button id="saveNameBtn" class="primary-btn" style="width: 100%; min-width: 100%;">Create My Greeting</button>
         </div>
     </div>
@@ -304,11 +346,11 @@
                 this.y = y;
                 this.color = color;
                 this.velocity = {
-                    x: (Math.random() - 0.5) * 8,
-                    y: (Math.random() - 0.5) * 8
+                    x: (Math.random() - 0.5) * 10,
+                    y: (Math.random() - 0.5) * 10
                 };
                 this.alpha = 1;
-                this.friction = 0.95;
+                this.friction = 0.96;
             }
 
             draw() {
@@ -326,7 +368,7 @@
                 this.velocity.y *= this.friction;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                this.alpha -= 0.02;
+                this.alpha -= 0.015;
             }
         }
 
@@ -371,7 +413,9 @@
         // Personalized Logic
         function initGreeting() {
             const urlParams = new URLSearchParams(window.location.search);
-            const wisherName = urlParams.get('name');
+            const wisherNameRaw = urlParams.get('name');
+            const wisherName = wisherNameRaw ? decodeURIComponent(wisherNameRaw).trim() : null;
+            
             const wisherDisplay = document.getElementById('wisher-name');
             const nameModal = document.getElementById('nameModal');
             const nameInput = document.getElementById('nameInput');
@@ -379,17 +423,16 @@
             const shareBtn = document.getElementById('share-btn');
             const createOwnBtn = document.getElementById('create-own-btn');
 
-            if (wisherName && wisherName.trim() !== "") {
-                wisherDisplay.innerText = decodeURIComponent(wisherName);
+            if (wisherName && wisherName !== "") {
+                wisherDisplay.innerText = wisherName;
                 document.getElementById('greeting').innerText = "Wishing You Eid Mubarak!";
                 nameModal.classList.remove('active');
             } else {
-                console.log("No name found, showing modal");
                 nameModal.style.display = 'flex';
                 nameModal.classList.add('active');
             }
 
-            saveNameBtn.addEventListener('click', (e) => {
+            saveNameBtn.addEventListener('click', () => {
                 const name = nameInput.value.trim();
                 if (name) {
                     const newUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(name);
@@ -400,28 +443,40 @@
             createOwnBtn.addEventListener('click', () => {
                 nameModal.style.display = 'flex';
                 nameModal.classList.add('active');
+                nameInput.focus();
             });
 
             shareBtn.addEventListener('click', () => {
-                const currentName = wisherName || "A Friend";
-                const shareUrl = window.location.origin + window.location.pathname + '?name=' + encodeURIComponent(currentName);
-                const text = encodeURIComponent(`*${currentName}* has sent you a special Eid greeting! 🌙✨\n\nOpen it here and see the magic: ${shareUrl}`);
-                window.open(`https://wa.me/?text=${text}`, '_blank');
+                if (!wisherName || wisherName === "") {
+                    // Force name input before sharing
+                    nameModal.style.display = 'flex';
+                    nameModal.classList.add('active');
+                    nameInput.focus();
+                    nameInput.placeholder = "Enter your name to share!";
+                } else {
+                    const text = encodeURIComponent(`*${wisherName}* has sent you a special Eid greeting! 🌙✨\n\nOpen it here and see the magic: ${window.location.href}`);
+                    window.open(`https://wa.me/?text=${text}`, '_blank');
+                }
             });
 
-            // Handle Enter key
             nameInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') saveNameBtn.click();
             });
         }
 
         document.addEventListener('DOMContentLoaded', initGreeting);
-        // Fallback for some browsers
         window.onload = () => {
-            if (!document.getElementById('nameModal').classList.contains('active') && !window.location.search.includes('name=')) {
-                initGreeting();
-            }
+            const hasName = new URLSearchParams(window.location.search).has('name');
+            if (!hasName) { siteModalShow(); }
         };
+
+        function siteModalShow() {
+            const modal = document.getElementById('nameModal');
+            if(modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>
