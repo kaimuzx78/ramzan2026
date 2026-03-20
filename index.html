@@ -1,131 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramzan 2026 Timetable - Mumbai</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1b5e20">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Eid Mubarak - Ramzan 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
-        rel="stylesheet">
-    <!-- Font Awesome for Social Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --eid-gold: #D4AF37;
+            --eid-gold-light: #F9E29B;
+            --eid-blue-dark: #0A192F;
+            --eid-blue-accent: #172A45;
+            --text-light: #E6F1FF;
+            --text-gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--eid-blue-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--eid-blue-accent) 0%, var(--eid-blue-dark) 100%);
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            max-width: 600px;
+            padding: 40px;
+            z-index: 1;
+            animation: fadeIn 2s ease-out;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: min(4rem, 12vw);
+            color: var(--eid-gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--eid-gold) 0%, #B8860B 100%);
+            color: var(--eid-blue-dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .secondary-link {
+            color: var(--eid-gold-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .secondary-link:hover {
+            opacity: 1;
+            border-bottom: 1px solid var(--eid-gold-light);
+        }
+
+        /* Lantern Animation */
+        .lantern {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: var(--eid-gold);
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L9 5H15L12 2ZM7 6V18H17V6H7ZM12 22L15 19H9L12 22Z"/></svg>');
+            animation: swing 3s infinite ease-in-out;
+            transform-origin: top center;
+            opacity: 0.6;
+        }
+
+        .lantern.left { top: 20px; left: 10%; animation-delay: 0s; }
+        .lantern.right { top: 20px; right: 10%; animation-delay: 0.5s; }
+
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--eid-gold);
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .instagram-footer {
+            margin-top: 40px;
+        }
+    </style>
 </head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="lantern left"></div>
+    <div class="lantern right"></div>
 
-<body class="light-mode">
-    <div class="background-decor"></div>
-
-    <header>
-        <div class="container compact-header">
-            <div class="header-brand">
-                <h1>Ramzan 2026</h1>
-                <div class="loc-badge">
-                    <i class="fas fa-location-dot"></i> Mumbai, India
-                </div>
-            </div>
-            <div class="header-actions">
-                <button id="pwa-install" class="action-btn install-btn" style="display: none;">
-                    <i class="fas fa-download"></i> App
-                </button>
-                <button id="whatsapp-share" class="action-btn share-btn">
-                    <i class="fab fa-whatsapp"></i> Share
-                </button>
-            </div>
+    <div class="content-wrapper">
+        <h1 id="greeting">Eid Mubarak!</h1>
+        <p>May this special day bring peace, happiness, and prosperity to you and your family. Wishing you a joyous celebration filled with love and blessings.</p>
+        
+        <div class="btn-container">
+            <a href="https://wa.me/?text=Eid%20Mubarak!%20Wishing%20you%20a%20joyous%20day.%20Check%20this%20out:%20" class="primary-btn" id="share-btn">Share the Joy</a>
+            <a href="index1.html" class="secondary-link">View Ramadan 2026 Calendar</a>
         </div>
-    </header>
 
-    <main class="container">
-        <!-- Countdown Section -->
-        <section id="timer-section" class="main-card compact-timer">
-            <h2 id="timer-title">Time remaining</h2>
-            <div class="countdown-container">
-                <div class="time-block">
-                    <span id="hours">00</span>
-                    <label>Hr</label>
-                </div>
-                <div class="time-block separator">:</div>
-                <div class="time-block">
-                    <span id="minutes">00</span>
-                    <label>Min</label>
-                </div>
-                <div class="time-block separator">:</div>
-                <div class="time-block">
-                    <span id="seconds">00</span>
-                    <label>Sec</label>
-                </div>
-            </div>
-            <div id="status-display" class="status-active">Loading...</div>
-        </section>
-
-        <!-- Timetable Section -->
-        <section id="timetable-section">
-            <div class="timetable-grid">
-                <div class="table-container main-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ROZA</th>
-                                <th>DATE</th>
-                                <th>SEHRI</th>
-                                <th>IFTAR</th>
-                            </tr>
-                        </thead>
-                        <tbody id="timetable-left"></tbody>
-                    </table>
-                </div>
-                <div class="table-container main-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ROZA</th>
-                                <th>DATE</th>
-                                <th>SEHRI</th>
-                                <th>IFTAR</th>
-                            </tr>
-                        </thead>
-                        <tbody id="timetable-right"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Duas Accordion Section -->
-        <section class="duas-accordion">
-            <details class="dua-item main-card">
-                <summary><span>Sehri ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
-                <div class="dua-content">
-                    <p class="arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
-                    <p class="translation">"I intend to keep the fast for tomorrow in the month of Ramadan."</p>
-                </div>
-            </details>
-            <details class="dua-item main-card">
-                <summary><span>Iftari ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
-                <div class="dua-content">
-                    <p class="arabic">اللّٰهُمَّ اِنِّی لَکَ صُمْتُ وَبِکَ اٰمَنْتُ وَعَلَیْکَ تَوَکَّلْتُ وَعَلٰی
-                        رِزْقِکَ اَفْطَرْتُ</p>
-                    <p class="translation">"O Allah! I fasted for You and I believe in You and I break my fast with Your
-                        sustenance."</p>
-                </div>
-            </details>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>Made with Love by <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="instagram-link">
-                    kaimu_zx78
-                </a></p>
+        <div class="instagram-footer">
+            <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="secondary-link" style="opacity: 0.8; font-weight: 700;">
+                <i class="fab fa-instagram"></i> @kaimu_zx78
+            </a>
         </div>
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Confetti effect
+            const body = document.body;
+            const colors = ['#D4AF37', '#F9E29B', '#E6F1FF', '#B8860B'];
+            
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Random properties
+                const size = Math.random() * 8 + 4;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 5;
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${left}%`;
+                confetti.style.top = `-20px`;
+                confetti.style.animationDuration = `${duration}s`;
+                confetti.style.animationDelay = `${delay}s`;
+                
+                body.appendChild(confetti);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, (duration + delay) * 1000);
+            }
+
+            // Initial burst
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+
+            // Continuous flow
+            setInterval(createConfetti, 200);
+
+            // Update share link with current URL
+            const shareBtn = document.getElementById('share-btn');
+            if (shareBtn) {
+                const currentUrl = window.location.href;
+                shareBtn.href = `https://wa.me/?text=Eid%20Mubarak!%20Wishing%20you%20a%20joyous%20day.%20Check%20this%20out:%20${encodeURIComponent(currentUrl)}`;
+            }
+        });
+    </script>
 </body>
-
 </html>

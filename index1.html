@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramzan 2026 Timetable - Mumbai</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1b5e20">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="light-mode">
+    <div class="background-decor"></div>
+
+    <header>
+        <div class="container compact-header">
+            <div class="header-brand">
+                <h1>Ramzan 2026</h1>
+                <div class="loc-badge">
+                    <i class="fas fa-location-dot"></i> Mumbai, India
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="pwa-install" class="action-btn install-btn" style="display: none;">
+                    <i class="fas fa-download"></i> App
+                </button>
+                <button id="whatsapp-share" class="action-btn share-btn">
+                    <i class="fab fa-whatsapp"></i> Share
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Calendar Ended Banner -->
+        <div class="main-card calendar-ended-banner" style="text-align: center; border-left: 5px solid var(--secondary-color); padding: 25px; margin-bottom: 20px; background: white; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+            <i class="fas fa-calendar-check" style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--secondary-color); margin-bottom: 10px;">Ramzan 2026 has Concluded</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">The 2026 Ramadan calendar is now over. Eid Mubarak!</p>
+            <a href="index.html" class="action-btn install-btn" style="display: inline-flex; text-decoration: none; justify-content: center; background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 700;">Return to Eid Page</a>
+        </div>
+
+        <!-- Countdown Section -->
+        <section id="timer-section" class="main-card compact-timer" style="opacity: 0.6; pointer-events: none; margin-bottom: 12px; border-radius: 20px; border: 1px solid var(--border-color); padding: 15px;">
+            <h2 id="timer-title" style="text-align: center;">Calendar Finished</h2>
+            <div class="countdown-container" style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
+                <div class="time-block" style="text-align: center;">
+                    <span id="hours" style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">00</span>
+                    <label style="display: block; font-size: 0.7rem; color: var(--text-muted);">Hr</label>
+                </div>
+                <div class="time-block separator" style="font-size: 1.5rem; color: var(--text-muted);">:</div>
+                <div class="time-block" style="text-align: center;">
+                    <span id="minutes" style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">00</span>
+                    <label style="display: block; font-size: 0.7rem; color: var(--text-muted);">Min</label>
+                </div>
+                <div class="time-block separator" style="font-size: 1.5rem; color: var(--text-muted);">:</div>
+                <div class="time-block" style="text-align: center;">
+                    <span id="seconds" style="font-size: 2rem; font-weight: 700; color: var(--primary-color);">00</span>
+                    <label style="display: block; font-size: 0.7rem; color: var(--text-muted);">Sec</label>
+                </div>
+            </div>
+            <div id="status-display" class="status-active" style="text-align: center; margin-top: 10px; font-weight: 700; color: var(--secondary-color);">Ramzan Completed</div>
+        </section>
+
+        <!-- Timetable Section -->
+        <section id="timetable-section">
+            <div class="timetable-grid">
+                <div class="table-container main-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ROZA</th>
+                                <th>DATE</th>
+                                <th>SEHRI</th>
+                                <th>IFTAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-left"></tbody>
+                    </table>
+                </div>
+                <div class="table-container main-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ROZA</th>
+                                <th>DATE</th>
+                                <th>SEHRI</th>
+                                <th>IFTAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetable-right"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Duas Accordion Section -->
+        <section class="duas-accordion">
+            <details class="dua-item main-card">
+                <summary><span>Sehri ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
+                <div class="dua-content">
+                    <p class="arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</p>
+                    <p class="translation">"I intend to keep the fast for tomorrow in the month of Ramadan."</p>
+                </div>
+            </details>
+            <details class="dua-item main-card">
+                <summary><span>Iftari ki Dua</span> <i class="fas fa-chevron-down"></i></summary>
+                <div class="dua-content">
+                    <p class="arabic">اللّٰهُمَّ اِنِّی لَکَ صُمْتُ وَبِکَ اٰمَنْتُ وَعَلَیْکَ تَوَکَّلْتُ وَعَلٰی
+                        رِزْقِکَ اَفْطَرْتُ</p>
+                    <p class="translation">"O Allah! I fasted for You and I believe in You and I break my fast with Your
+                        sustenance."</p>
+                </div>
+            </details>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Made with Love by <a href="https://www.instagram.com/kaimu_zx78/" target="_blank" class="instagram-link">
+                    kaimu_zx78
+                </a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
